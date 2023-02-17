@@ -1,5 +1,7 @@
 package com.sistema.blog.controlador;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +42,7 @@ public class PublicacionControlador {
 	}
 
 	@PostMapping
-	public ResponseEntity<PublicacionDto> guardarPublicacion(@RequestBody PublicacionDto publicacionDTO) {
+	public ResponseEntity<PublicacionDto> guardarPublicacion(@Valid @RequestBody PublicacionDto publicacionDTO) {
 		return new ResponseEntity<>(publicacionServicio.crearPublicacion(publicacionDTO), HttpStatus.CREATED);
 	}
 
