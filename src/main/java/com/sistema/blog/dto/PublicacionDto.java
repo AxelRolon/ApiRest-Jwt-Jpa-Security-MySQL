@@ -17,7 +17,7 @@ public class PublicacionDto {
 	private String titulo;
 	
 	@NotEmpty
-	@Size(min = 10, message = "El titulo de la publicacion debe tener mas de 10 caracteres")
+	@Size(min = 10, message = "	La descripcion de la publicacion debe tener mas de 10 caracteres")
 	private String descripcion;
 	
 

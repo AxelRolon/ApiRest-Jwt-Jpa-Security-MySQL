@@ -2,6 +2,8 @@ package com.sistema.blog.controlador;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,17 +40,18 @@ public class ComentarioControlador {
 		return new ResponseEntity<>(comentarioDTO, HttpStatus.OK);
 	}
 
-	@PostMapping("/publicaciones/{publicacionId}/comentarios")
-	public ResponseEntity<ComentarioDTO> guardarComentario(@PathVariable(value = "publicacionId") long publicacionId,
-			@RequestBody ComentarioDTO comentarioDTO) {
+	@PostMapping("/publicaciones/{publicacionId}/comentarios")//valid para ejecutar correctamente las excepciones notempy y size
+	//correccion de error, el @valid debe estar al costado de RequestBody no de PathVariable
+	public ResponseEntity<ComentarioDTO> guardarComentario( @PathVariable(value = "publicacionId") long publicacionId,
+			@Valid@RequestBody ComentarioDTO comentarioDTO) {
 
 		return new ResponseEntity<>(comentarioServicio.crearComentario(publicacionId, comentarioDTO),
 				HttpStatus.CREATED);
 	}
 
 	@PutMapping("/publicaciones/{publicacionId}/comentarios/{id}")
-	public ResponseEntity<ComentarioDTO> actualizarComentario(@PathVariable(value = "publicacionId") Long publicacionId,
-			@PathVariable(value = "id") Long comentarioId, @RequestBody ComentarioDTO comentarioDTO) {
+	public ResponseEntity<ComentarioDTO> actualizarComentario( @PathVariable(value = "publicacionId") Long publicacionId,
+			@PathVariable(value = "id") Long comentarioId,@Valid @RequestBody ComentarioDTO comentarioDTO) {
 
 		ComentarioDTO comentarioActualizado = comentarioServicio.actualizarComentario(publicacionId, comentarioId,
 				comentarioDTO);
