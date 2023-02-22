@@ -21,7 +21,7 @@ public class ComentarioServImpl implements ComentarioServicio {
 
 	@Autowired
 	private ModelMapper modelMapper;
-	
+
 	@Autowired
 	private ComentarioRepositorio comentarioRepositorio;
 
@@ -38,7 +38,8 @@ public class ComentarioServImpl implements ComentarioServicio {
 		Comentario nuevoComentario = comentarioRepositorio.save(comentario);
 		return mapearDto(nuevoComentario);
 	}
-	 @Override
+
+	@Override
 	public List<ComentarioDTO> obtenerComentarioPorPublicacionId(long publicacionId) {
 
 		List<Comentario> comentarios = comentarioRepositorio.findByPublicacionId(publicacionId);
@@ -94,8 +95,7 @@ public class ComentarioServImpl implements ComentarioServicio {
 		}
 		comentarioRepositorio.delete(comentario);
 	}
-	
-	
+
 	/*
 	 * private ComentarioDTO mapearDto(Comentario comentario) { ComentarioDTO
 	 * comentarioDTO = new ComentarioDTO(); comentarioDTO.setId(comentario.getId());
@@ -116,17 +116,18 @@ public class ComentarioServImpl implements ComentarioServicio {
 	 * 
 	 * return comentario; }
 	 */
-	
-	//Model mapper simplifica el codigo de arriba sobre las conversiones o Mapeo de un objeto a una clase destino
-	
+
+	// Model mapper simplifica el codigo de arriba sobre las conversiones o Mapeo de
+	// un objeto a una clase destino
+
 	private ComentarioDTO mapearDto(Comentario comentario) {
 		ComentarioDTO comentarioDTO = modelMapper.map(comentario, ComentarioDTO.class);
 		return comentarioDTO;
 	}
-	
+
 	private Comentario mapearEntidad(ComentarioDTO comentarioDTO) {// entidad a dtoc
 		Comentario comentario = modelMapper.map(comentarioDTO, Comentario.class);
-		return comentario; 
+		return comentario;
 	}
 
 }

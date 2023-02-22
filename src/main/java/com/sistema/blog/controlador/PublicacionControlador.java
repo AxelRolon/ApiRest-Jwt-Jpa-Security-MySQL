@@ -41,13 +41,13 @@ public class PublicacionControlador {
 	public ResponseEntity<PublicacionDto> obtenerPublicacionById(@PathVariable(name = "id") long id) {
 		return ResponseEntity.ok(publicacionServicio.obtenerPublicacionByiD(id));
 	}
-	
+
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping
 	public ResponseEntity<PublicacionDto> guardarPublicacion(@Valid @RequestBody PublicacionDto publicacionDTO) {
 		return new ResponseEntity<>(publicacionServicio.crearPublicacion(publicacionDTO), HttpStatus.CREATED);
 	}
-	
+
 	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/{id}")
 
@@ -55,9 +55,10 @@ public class PublicacionControlador {
 			@PathVariable(name = "id") long id) {
 
 		PublicacionDto publicacionRespuesta = publicacionServicio.actualizarPublicacion(publicacionDto, id);
-		return new ResponseEntity<>(publicacionRespuesta, HttpStatus.OK); 
+		return new ResponseEntity<>(publicacionRespuesta, HttpStatus.OK);
 
 	}
+
 	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> eliminarPublicacion(@PathVariable(name = "id") long id) {

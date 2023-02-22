@@ -96,7 +96,7 @@ public class PublicacionServicioImpl implements PublicacionServicio {
 		return publicacionDto;
 
 	}
-	
+
 	private Publicacion mapearEntidad(PublicacionDto publicacionDto) {
 		Publicacion publicacion = modelMapper.map(publicacionDto, Publicacion.class);
 		return publicacion;

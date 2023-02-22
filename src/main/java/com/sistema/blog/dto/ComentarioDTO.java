@@ -15,8 +15,6 @@ public class ComentarioDTO {
 	@NotEmpty
 	@Size(min = 10, message = "el cuerpo del comentario dere tener al menos 10 caracteres ")
 	private String cuerpo;
-	
-
 
 	public Long getId() {
 		return id;

@@ -40,32 +40,34 @@ public class ComentarioControlador {
 		return new ResponseEntity<>(comentarioDTO, HttpStatus.OK);
 	}
 
-	@PostMapping("/publicaciones/{publicacionId}/comentarios")//valid para ejecutar correctamente las excepciones notempy y size
-	//correccion de error, el @valid debe estar al costado de RequestBody no de PathVariable
-	public ResponseEntity<ComentarioDTO> guardarComentario( @PathVariable(value = "publicacionId") long publicacionId,
-			@Valid@RequestBody ComentarioDTO comentarioDTO) {
+	@PostMapping("/publicaciones/{publicacionId}/comentarios") // valid para ejecutar correctamente las excepciones
+																// notempy y size
+	// correccion de error, el @valid debe estar al costado de RequestBody no de
+	// PathVariable
+	public ResponseEntity<ComentarioDTO> guardarComentario(@PathVariable(value = "publicacionId") long publicacionId,
+			@Valid @RequestBody ComentarioDTO comentarioDTO) {
 
 		return new ResponseEntity<>(comentarioServicio.crearComentario(publicacionId, comentarioDTO),
 				HttpStatus.CREATED);
 	}
 
 	@PutMapping("/publicaciones/{publicacionId}/comentarios/{id}")
-	public ResponseEntity<ComentarioDTO> actualizarComentario( @PathVariable(value = "publicacionId") Long publicacionId,
-			@PathVariable(value = "id") Long comentarioId,@Valid @RequestBody ComentarioDTO comentarioDTO) {
+	public ResponseEntity<ComentarioDTO> actualizarComentario(@PathVariable(value = "publicacionId") Long publicacionId,
+			@PathVariable(value = "id") Long comentarioId, @Valid @RequestBody ComentarioDTO comentarioDTO) {
 
 		ComentarioDTO comentarioActualizado = comentarioServicio.actualizarComentario(publicacionId, comentarioId,
 				comentarioDTO);
 
 		return new ResponseEntity<>(comentarioActualizado, HttpStatus.OK);
 	}
-	
+
 	@DeleteMapping("/publicaciones/{publicacionId}/comentarios/{id}")
-	public ResponseEntity<String> eliminarComentarioPorId(
-			@PathVariable(value = "publicacionId") Long publicacionId, @PathVariable(value = "id") Long comentarioId){
+	public ResponseEntity<String> eliminarComentarioPorId(@PathVariable(value = "publicacionId") Long publicacionId,
+			@PathVariable(value = "id") Long comentarioId) {
 
 		comentarioServicio.eliminarComentario(publicacionId, comentarioId);
-		
+
 		return new ResponseEntity<>("Eliminado correctamente", HttpStatus.OK);
-		
+
 	}
 }
